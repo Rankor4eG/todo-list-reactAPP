@@ -1,0 +1,14 @@
+.search-input{
+    width: auto;
+    flex-grow: 1;
+    margin-right: 5px;
+    border-radius: 4px;
+    border: 1px solid rgb(61, 58, 58);
+    outline: none;
+    &::placeholder{
+        color:rgb(26, 24, 27);
+        font-size: 20px;
+        padding-left: 10px;
+    }
+}
+

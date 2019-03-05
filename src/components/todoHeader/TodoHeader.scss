@@ -1,0 +1,14 @@
+.todo-header{    
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+     &__headline{
+        flex-grow: 1;
+        float: left;
+    }
+    &__info{
+        color:grey;
+        font-size: 1.2rem;
+        float: right;
+    }
+}
