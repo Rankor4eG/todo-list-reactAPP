@@ -12,12 +12,14 @@
         margin-left: 1rem;
         line-height: 35px;
         cursor: pointer;
-    }
-    .done{
-        text-decoration: line-through;
-    }
-    .important{
-        font-weight: bold;
-        color: steelblue;
-    }
+        user-select: none;
+    }   
+   
+}
+.done{
+    text-decoration: line-through;
+}
+.important{
+    font-weight: bold;
+    color: steelblue;
 }
