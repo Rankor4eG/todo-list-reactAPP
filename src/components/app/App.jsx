@@ -4,7 +4,7 @@ import TodoHeader from '../todoHeader/TodoHeader';
 import TodoList from '../todoList/TodoList';
 import ItemFilter from '../itemFilter/ItemFilter';
 import TodoSearch from '../todoSearch/TodoSearch';
-import TodoItemAdd from '../TodoItemAdd/TodoItemAdd';
+import TodoItemAdd from '../todoItemAdd/TodoItemAdd';
 
 import './App.scss'
 
@@ -21,7 +21,7 @@ export class Todo extends Component{
       this.createTodoItem('Go on a trip.'),      
     ], 
     term: '',
-    // filter: 'active' // active, all, done
+    filter: 'all' // active, all, done
   }
   createTodoItem(label){
     return{
@@ -96,7 +96,10 @@ export class Todo extends Component{
   };
 
   onSearchChange =(term) =>{
-    this.setState(term);
+    this.setState({term});
+  };
+  onFilterChange =(filter) =>{
+    this.setState({filter});
   };
 
   search(items, term){
@@ -108,26 +111,26 @@ export class Todo extends Component{
     })
   }
 
-  // filter(items, filter){
-  //   switch(filter){
-  //     case 'all':
-  //       return items;
-  //     case 'active':
-  //       return items.filter((item) => !item.done);
-  //     case 'done':
-  //       return items.filter((item) => item.done);
-  //     default:
-  //       return items;
-  //   }
-  // }
+  filter(items, filter){
+    switch(filter){
+      // case 'all':
+      //   return items;
+      case 'active':
+        return items.filter((item) => !item.done);
+      case 'done':
+        return items.filter((item) => item.done);
+      default:
+        return items;
+    }
+  }
 
   render(){
-    const {todoData, term, /*filter*/} = this.state
+    const {todoData, term, filter} = this.state
     const doneCount = todoData.filter((el) => el.done).length;
     const todoCount = todoData.length - doneCount;
 
-    const visibleItems = //this.filter(
-      this.search(todoData, term); //,filter);
+    const visibleItems = this.filter(
+      this.search(todoData, term), filter);
 
     return (
       <div className="todo-app wrapper">
@@ -135,7 +138,10 @@ export class Todo extends Component{
         <div className="d-flex top-panel">
           <TodoSearch 
           onSearchChange ={this.onSearchChange}/>
-          <ItemFilter />
+          <ItemFilter 
+          filter ={filter}
+          onFilterChange = {this.onFilterChange}
+          />
         </div>      
         <TodoList 
           todos ={visibleItems}
